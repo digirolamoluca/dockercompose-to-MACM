@@ -17,7 +17,8 @@ networks_connects = []
 depends_on = []
 
 #inserire il path relativo alla posizione del docker-compose
-fp=open("C:/Users/lucad/Desktop/ingegneria/Tesi Rak/newway/docker-compose.yml","r")
+#example: fp=open("C:/Users/luca/Desktop/docker-compose.yml","r")
+fp=open("dockercompose-to-MACM/Case Study/docker-compose.yml","r")
 fp2=fp.read()
 
 #converto yml in dizionario:
@@ -48,7 +49,9 @@ for x in container_name:
 			depends_on.append(docker_composeObj['services'][x]['depends_on'])
 	
 #inserire il path relativo alla posizione in cui salvare la query cypher
-file_cypher=open("C:/Users/lucad/Desktop/ingegneria/Tesi Rak/newway/cypher.txt","w")
+#example: file_cypher=open("C:/Users/luca/Desktop/cypher.txt","w")
+file_cypher=open("dockercompose-to-MACM/Result/cypher.txt","w")
+
 file_cypher.write("CREATE\n")
 
 
