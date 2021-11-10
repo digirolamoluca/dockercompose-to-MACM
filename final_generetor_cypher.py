@@ -16,6 +16,7 @@ networks_connects = []
 
 depends_on = []
 
+#inserire il path relativo alla posizione del docker-compose
 fp=open("C:/Users/lucad/Desktop/ingegneria/Tesi Rak/newway/docker-compose.yml","r")
 fp2=fp.read()
 
@@ -46,7 +47,7 @@ for x in container_name:
 		if(key=='depends_on'):
 			depends_on.append(docker_composeObj['services'][x]['depends_on'])
 	
-
+#inserire il path relativo alla posizione in cui salvare la query cypher
 file_cypher=open("C:/Users/lucad/Desktop/ingegneria/Tesi Rak/newway/cypher.txt","w")
 file_cypher.write("CREATE\n")
 
@@ -63,6 +64,7 @@ for x in networks:
     file_cypher.write("\t("+networks_without[ind]+":service {name:'"+x+"', type:'TDB', app_id:'"+app_id+"', application:'"+application_name+"'}),\n")
     ind+=1  
 
+#per pulizia di codice in output:
 file_cypher.write("\n")
 
 #create uses
@@ -76,6 +78,7 @@ for x in container_name:
 				file_cypher.write("\t("+re.sub('[- ]','',x)+")-[:uses]->("+re.sub('[- ]','',depends_on[ind][i])+"),\n")
 			ind+=1
 
+#per pulizia di codice in output:
 file_cypher.write("\n")
 		
 #create connects
