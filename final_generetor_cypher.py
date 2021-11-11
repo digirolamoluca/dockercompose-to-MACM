@@ -16,9 +16,15 @@ networks_connects = []
 
 depends_on = []
 
+import os
+script_dir = os.path.dirname(__file__)
+rel_path = "Case Study\docker-compose.yml"
+abs_file_path = os.path.join(script_dir, rel_path)
+print(abs_file_path)
+
 #inserire il path relativo alla posizione del docker-compose
 #example: fp=open("C:/Users/luca/Desktop/docker-compose.yml","r")
-fp=open("dockercompose-to-MACM/Case Study/docker-compose.yml","r")
+fp=open("Case Study\docker-compose.yml","r")
 fp2=fp.read()
 
 #converto yml in dizionario:
@@ -50,7 +56,7 @@ for x in container_name:
 	
 #inserire il path relativo alla posizione in cui salvare la query cypher
 #example: file_cypher=open("C:/Users/luca/Desktop/cypher.txt","w")
-file_cypher=open("dockercompose-to-MACM/Result/cypher.txt","w")
+file_cypher=open("Result\cypher.txt","w")
 
 file_cypher.write("CREATE\n")
 
