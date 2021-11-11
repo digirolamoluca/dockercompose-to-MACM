@@ -61,7 +61,6 @@ file_cypher=open("Result\cypher.txt","w")
 file_cypher.write("CREATE\n")
 
 
-
 #create node
 ind=0
 for x in container_name:
