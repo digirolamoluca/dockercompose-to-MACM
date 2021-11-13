@@ -3,14 +3,6 @@ import os
 from macm import *
 
 
-print("Insert Application name:")
-application_name=input()
-
-
-print("Insert app_id:")
-app_id=input()
-
-
 node_container = []
 node_networks = []
 edge_uses = []
@@ -42,9 +34,11 @@ fp2=fp.read()
 docker_composeObj=(yaml.safe_load(fp2))
 
 
+
 #ottengo i container name
 for key,value in docker_composeObj['services'].items():
 	container_name.append(key)
+
 
 
 #NETWORKS: ottengo le networks associate ai singoli container per le relazioni di uses	
@@ -89,9 +83,7 @@ for x in container_name:
 	node_container.append(Node("service",x,"TDB",app_id,application_name))
 	node_container[ind].addnode()
     #file_cypher.write("\t("+container_name_filter[ind]+":service {name:'"+x+"', type:'TDB', app_id:'"+app_id+"', application:'"+application_name+"'}),\n")
-	ind+=1
-
-
+	ind+=1   
 
 #creo i nodi networks(se presenti)
 if(len(networks_connects)!=0):
@@ -158,6 +150,11 @@ if(len(networks_connects)!=0):
 					ind2=0
 					to_node = None
 					while to_node == None:
+						#stampe di controllo
+						#print("Step")
+						#print(ind)
+						#print(i)
+						#print(ind2)
 						to_node=getnode_fromname(node_networks[ind2],networks_connects[ind][i])
 						ind2+=1
 					
