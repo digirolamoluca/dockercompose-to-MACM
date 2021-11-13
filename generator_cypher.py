@@ -18,14 +18,16 @@ depends_on = []
 
 
 script_dir = os.path.dirname(__file__)
-rel_path = "C:/Users/lucad/Desktop/ingegneria/Tesi Rak/newway/script_py/docker-compose.yml"
+#inserire il path relativo alla posizione del docker-compose
+#example: rel_path="C:/Users/luca/Desktop/docker-compose.yml"
+rel_path = "dockercompose-to-MACM/Case Study/docker-compose.yml"
 abs_file_path = os.path.join(script_dir, rel_path)
 
 
 
 #inserire il path relativo alla posizione del docker-compose
 #example: fp=open("C:/Users/luca/Desktop/docker-compose.yml","r")
-fp=open("C:/Users/lucad/Desktop/ingegneria/Tesi Rak/newway/script_py/docker-compose.yml","r")
+fp=open("dockercompose-to-MACM/Case Study/docker-compose.yml","r")
 fp2=fp.read()
 
 
