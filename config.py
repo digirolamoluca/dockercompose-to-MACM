@@ -2,4 +2,5 @@
 dockercompose_name = "docker-compose"
 
 #inserire path della directory in cui salvare il macm in output
-destination_path = "C:/Users/lucad/Desktop"
+#example: destination_path = "C:/Users/lucad/Desktop"
+destination_path = "dockercompose-to-MACM/Result"
