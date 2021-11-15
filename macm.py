@@ -1,5 +1,6 @@
 import networkx as nx
 import re
+from config import *
 from networkx import *
 
 #creo grafo
@@ -14,9 +15,7 @@ print("Insert app_id:")
 app_id=input()
 
 
-#inserire il path relativo alla posizione in cui salvare la query cypher
-#example: file_cypher=open("C:/Users/lucad/Desktop/"+application_name+".macm","w")
-file_cypher=open("dockercompose-to-MACM/Result/"+application_name+".macm","w")
+file_cypher=open(destination_path+"/"+application_name+".macm","w")
 file_cypher.write("CREATE\n")
 
 
