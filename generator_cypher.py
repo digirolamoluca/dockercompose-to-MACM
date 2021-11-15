@@ -87,8 +87,11 @@ for x in container_name:
 	node_container.append(Node("service",x,"TDB",app_id,application_name))
 	node_container[ind].addnode()
     #file_cypher.write("\t("+container_name_filter[ind]+":service {name:'"+x+"', type:'TDB', app_id:'"+app_id+"', application:'"+application_name+"'}),\n")
-	ind+=1   
+	ind+=1
 
+	
+
+	
 #creo i nodi networks(se presenti)
 if(len(networks_connects)!=0):
 	ind=0
