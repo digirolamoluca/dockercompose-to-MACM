@@ -2,19 +2,24 @@ import networkx as nx
 import re
 from digraph import DiGraph
 
+
 #creo grafo
 macm=nx.DiGraph()
+
 
 print("Insert Application name:")
 application_name=input()
 
+
 print("Insert app_id:")
 app_id=input()
+
 
 #inserire il path relativo alla posizione in cui salvare la query cypher
 #example: file_cypher=open("C:/Users/lucad/Desktop/"+application_name+".macm","w")
 file_cypher=open("dockercompose-to-MACM/Result/"+application_name+".macm","w")
 file_cypher.write("CREATE\n")
+
 
 class Node(DiGraph):
 	def __init__(self, service, namee, type_node,  app_id, application_name):
