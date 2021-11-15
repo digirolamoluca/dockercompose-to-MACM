@@ -1,0 +1,5 @@
+#inserire nome del file docker-compose (senza estensione). Il file docker-compose dovrà trovarsi nella stessa directory in cui è eseguito il generator_cypher
+dockercompose_name = "docker-compose"
+
+#inserire path della directory in cui salvare il macm in output
+destination_path = "C:/Users/lucad/Desktop"
