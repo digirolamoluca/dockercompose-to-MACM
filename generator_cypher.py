@@ -86,7 +86,6 @@ ind=0
 for x in container_name:
 	node_container.append(Node("service",x,"TDB",app_id,application_name))
 	node_container[ind].addnode()
-    #file_cypher.write("\t("+container_name_filter[ind]+":service {name:'"+x+"', type:'TDB', app_id:'"+app_id+"', application:'"+application_name+"'}),\n")
 	ind+=1
 
 	
@@ -98,7 +97,6 @@ if(len(networks_connects)!=0):
 	for x in networks:
 		node_networks.append(Node("network",x,"TDB",app_id,application_name))
 		node_networks[ind].addnode()
-		#file_cypher.write("\t("+networks_filter[ind]+":service {name:'"+x+"', type:'TDB', app_id:'"+app_id+"', application:'"+application_name+"'}),\n")
 		ind+=1  
 
 
