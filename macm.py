@@ -1,7 +1,6 @@
 import networkx as nx
 import re
-from digraph import DiGraph
-
+from networkx import *
 
 #creo grafo
 macm=nx.DiGraph()
