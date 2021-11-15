@@ -3,15 +3,19 @@ import os
 from macm import *
 
 
+
 node_container = []
 node_networks = []
 edge_uses = []
 edge_connects = []
 
+
 container_name = []
+
 
 networks = []
 networks_connects = []
+
 
 depends_on = []
 
@@ -25,10 +29,12 @@ abs_file_path = os.path.join(script_dir, rel_path)
 
 
 
+
 #inserire il path relativo alla posizione del docker-compose
 #example: fp=open("C:/Users/luca/Desktop/docker-compose.yml","r")
 fp=open("dockercompose-to-MACM/Case Study/docker-compose.yml","r")
 fp2=fp.read()
+
 
 
 
@@ -37,10 +43,12 @@ docker_composeObj=(yaml.safe_load(fp2))
 
 
 
+
 #ottengo i container name
 for key,value in docker_composeObj['services'].items():
 	container_name.append(key)
 
+	
 
 
 #NETWORKS: ottengo le networks associate ai singoli container per le relazioni di uses	
@@ -54,13 +62,15 @@ for x in container_name:
 if ind==0:
 	print("Non sono presenti 'networks' nel docker compose file\n")
 
+	
 
 
 #NETWORKS: ottengo le networks(uno per tipo non replicato) per la creazione di nodi networks(se presenti)
 if(len(networks_connects)!=0):
 	for key in docker_composeObj['networks'].keys():
 		networks.append(key)
-	
+
+		
 	
 	
 #DEPENDS_ON: ottengo le depends_on associate ai singoli container per le relazioni di connects
@@ -73,7 +83,6 @@ for x in container_name:
 			depends_on.append(docker_composeObj['services'][x]['depends_on'])
 if ind==0:
 	print("Non sono presenti 'depends_on' nel docker compose file\n")	
-
 
 
 
@@ -98,8 +107,10 @@ if(len(networks_connects)!=0):
 
 
 
+		
 #per pulizia di codice in output:
 file_cypher.write("\n")
+
 
 
 
@@ -133,8 +144,10 @@ if(len(depends_on)!=0):
 
 
 
+		
 #per pulizia di codice in output:
 file_cypher.write("\n")
+
 
 
 
@@ -152,11 +165,6 @@ if(len(networks_connects)!=0):
 					ind2=0
 					to_node = None
 					while to_node == None:
-						#stampe di controllo
-						#print("Step")
-						#print(ind)
-						#print(i)
-						#print(ind2)
 						to_node=getnode_fromname(node_networks[ind2],networks_connects[ind][i])
 						ind2+=1
 					
@@ -173,6 +181,8 @@ if(len(networks_connects)!=0):
 				ind+=1
 		count+=1		
 
+
+		
 
 #stampa dell'oggetto grafo finale
 print("L'oggetto grafo finale è il seguente:")
