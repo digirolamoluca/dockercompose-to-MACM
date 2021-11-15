@@ -1,5 +1,6 @@
 import yaml
 import os
+from config import *
 from macm import *
 
 
