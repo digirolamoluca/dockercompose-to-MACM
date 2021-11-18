@@ -264,7 +264,7 @@ if(ind01!=0):
 
 
 #creo nodo VM che fa da host per tutti i container
-VM=Node("service:IaaS","VM1","VM",app_id,application_name)
+VM=Node("IaaS:service","VM1","VM",app_id,application_name)
 VM.addnode()
 
 
