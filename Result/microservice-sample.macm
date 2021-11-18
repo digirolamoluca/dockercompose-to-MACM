@@ -1,5 +1,5 @@
 CREATE
-	(VM1:service:IaaS {name:'VM1', type:'VM', app_id:'4', application:'microservice-sample'}),
+	(VM1:IaaS:service {name:'VM1', type:'VM', app_id:'4', application:'microservice-sample'}),
 	(apigateway:service {name:'api-gateway', type:'Service.Web?', app_id:'4', application:'microservice-sample'}),
 	(serviceone:service {name:'service-one', type:'?', app_id:'4', application:'microservice-sample'}),
 	(serviceonedb:service {name:'service-one-db', type:'?', app_id:'4', application:'microservice-sample'}),
