@@ -18,6 +18,9 @@ networks_connects = []
 
 depends_on = []
 
+ports = []
+ports_container = []
+
 
 
 script_dir = os.path.dirname(__file__)
@@ -72,41 +75,225 @@ if ind==0:
 
 
 
-#creo nodo VM che fa da host per tutti i container
-VM=Node("IaaS","VM","TBD",app_id,application_name)
-VM.addnode()
+#ottieni ports container e associa asset type
+ind00=0
+net00 = []
+properties0 = []
+for x in container_name:
+	properties0.append(list(docker_composeObj['services'][x].keys()))
 
+for j in range(0,len(container_name),1):
+	ind00=0	
+	for i in range(0,len(properties0[j]),1):
+		if(properties0[j][i]=='ports'):
+			net00.insert(j,1)
+		if(properties0[j][i]!='ports'):
+			ind00+=1
+		if(ind00==len(properties0[j])):
+			net00.insert(j,0)
+
+ind01=0
+for x in container_name:
+	for key,value in docker_composeObj['services'][x].items():
+		#definiamo l'if siccome depends_on può non essere presente nel docker compose
+		if(key=='ports'):
+			ind01+=1
+			ports.append(docker_composeObj['services'][x]['ports'])
+if(ind01==0):
+	print("Non è presente alcun 'ports' nel docker compose")
+
+if(ind01!=0): #mi assicuro che esistano ports
+	net3 = [] #verifico quanto numeri di porti associati ai container ci sono
+	temp = ""
+	for j in range(0,len(ports),1):	
+		net3.insert(j,len(ports[j]))
+		for k in range(0,len(ports[j]),1):
+			flag=0
+			for i in range(0,len(ports[j][k]),1):
+				a=1
+				if(flag==1):
+					temp=temp+ports[j][k][i]
+				if(ports[j][k][i]==':'):
+					flag=1
+
+			ports_container.append(temp)
+			temp = ""
+
+for j in range(0,len(net00),1):
+	#nei container che non è presente la chiave ports inserire '?' per trasferirlo poi all'asset type
+	if(net00[j]==0):
+		ports_container.insert(j,'?')
+	
+if(ind01!=0):	
+	#definisco gli asset_type secondo i porti noti
+	asset_type = []
+	for x in range(0,len(container_name),1):
+		flag2=0
+		for y in range(0,net00[x],1):
+			if(ports_container[x]=='20' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='21' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='22' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='23' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='25' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='53' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='67' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='68' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='69' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='80' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='88' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='104' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='110' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='113' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='119' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='123' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='143' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='443' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='465' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='563' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='587' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='591' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='636' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='993' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='995' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='1883' and flag2==0):
+				asset_type.append('Service.MQTTBroker?')
+				flag2=1
+			if(ports_container[x]=='1433' and flag2==0):
+				asset_type.append('Service.DB?')
+				flag2=1
+			if(ports_container[x]=='1434' and flag2==0):
+				asset_type.append('Service.DB?')
+				flag2=1
+			if(ports_container[x]=='3050' and flag2==0):
+				asset_type.append('Service.DB?')
+				flag2=1
+			if(ports_container[x]=='3128' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='3306' and flag2==0):
+				asset_type.append('Service.DB?')
+				flag2=1
+			if(ports_container[x]=='3389' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='4662' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='4672' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='4711' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='5000' and flag2==0):
+				asset_type.append('Service.DB?')
+				flag2=1
+			if(ports_container[x]=='5222' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='5269' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='5432' and flag2==0):
+				asset_type.append('Service.DB?')
+				flag2=1
+			if(ports_container[x]=='8080' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='8118' and flag2==0):
+				asset_type.append('Service.Web?')
+				flag2=1
+			if(ports_container[x]=='8883' and flag2==0):
+				asset_type.append('Service.MQTTBroker?')
+				flag2=1
+				
+		if(flag2==0):
+			asset_type.append('?')
+
+
+
+
+#creo nodo VM che fa da host per tutti i container
+VM=Node("service:IaaS","VM1","VM",app_id,application_name)
+VM.addnode()
 
 
 #se c'è qualche container privo di networks creo nodo default-network
 if(len(networks_connects) != len(container_name)):
-	default_network=Node("network","default-network","TBD",app_id,application_name)
+	default_network=Node("network","default-network","?",app_id,application_name)
 	default_network.addnode()
 
-	
 
 #creato i nodi container
 ind=0
 for x in container_name:
-	node_container.append(Node("service",x,"TDB",app_id,application_name))
+	node_container.append(Node("service",x,asset_type[ind],app_id,application_name))
 	node_container[ind].addnode()
-    #file_cypher.write("\t("+container_name_filter[ind]+":service {name:'"+x+"', type:'TDB', app_id:'"+app_id+"', application:'"+application_name+"'}),\n")
 	ind+=1   
 
-	
-	
+
+
 #per pulizia di codice in output:
-file_cypher.write("\n")	
-	
-	
-	
+file_cypher.write("\n")
+
+
+
 #creo i nodi networks(se presenti)
 if(len(networks_connects)!=0):
 	ind=0
 	for x in networks:
-		node_networks.append(Node("network",x,"TDB",app_id,application_name))
+		node_networks.append(Node("network",x,"?",app_id,application_name))
 		node_networks[ind].addnode()
-		#file_cypher.write("\t("+networks_filter[ind]+":service {name:'"+x+"', type:'TDB', app_id:'"+app_id+"', application:'"+application_name+"'}),\n")
 		ind+=1  
 
 
@@ -177,12 +364,11 @@ for j in range(0,len(net),1):
 		count+=1
 
 
-		
 #per pulizia di codice in output:
 file_cypher.write("\n")
 
 
-		
+
 #creo gli archi connects se le networks sono presenti nel docker compose
 #il valore q lo utilizziamo per non inserire la virgola nell'ultima connect
 if(len(networks_connects)!=0):
@@ -265,6 +451,10 @@ for j in range(0,len(net2),1):
 		print("Il container "+container_name[j]+" non presenta depends_on")
 
 
+
+
+
+			
 #stampa dell'oggetto grafo finale
 print("\nL'oggetto grafo finale è il seguente:")
 print(get_graph())
