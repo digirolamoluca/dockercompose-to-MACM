@@ -130,79 +130,10 @@ if(ind01!=0):
 	for x in range(0,len(container_name),1):
 		flag2=0
 		for y in range(0,net00[x],1):
-			if(ports_container[x]=='20' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='21' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='22' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='23' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='25' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='53' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='67' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='68' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='69' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
 			if(ports_container[x]=='80' and flag2==0):
 				asset_type.append('Service.Web?')
 				flag2=1
-			if(ports_container[x]=='88' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='104' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='110' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='113' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='119' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='123' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='143' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
 			if(ports_container[x]=='443' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='465' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='563' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='587' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='591' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='636' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='993' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='995' and flag2==0):
 				asset_type.append('Service.Web?')
 				flag2=1
 			if(ports_container[x]=='1883' and flag2==0):
@@ -217,40 +148,16 @@ if(ind01!=0):
 			if(ports_container[x]=='3050' and flag2==0):
 				asset_type.append('Service.DB?')
 				flag2=1
-			if(ports_container[x]=='3128' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
 			if(ports_container[x]=='3306' and flag2==0):
 				asset_type.append('Service.DB?')
 				flag2=1
-			if(ports_container[x]=='3389' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='4662' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='4672' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='4711' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
 			if(ports_container[x]=='5000' and flag2==0):
 				asset_type.append('Service.DB?')
-				flag2=1
-			if(ports_container[x]=='5222' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='5269' and flag2==0):
-				asset_type.append('Service.Web?')
 				flag2=1
 			if(ports_container[x]=='5432' and flag2==0):
 				asset_type.append('Service.DB?')
 				flag2=1
 			if(ports_container[x]=='8080' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='8118' and flag2==0):
 				asset_type.append('Service.Web?')
 				flag2=1
 			if(ports_container[x]=='8883' and flag2==0):
@@ -260,13 +167,63 @@ if(ind01!=0):
 		if(flag2==0):
 			asset_type.append('?')
 
-
+	#definisco i protocolli per i porti noti
+	protocol_type = []
+	for x in range(0,len(container_name),1):
+		flag3=0
+		for y in range(0,net00[x],1):
+			if(ports_container[x]=='20' and flag2==0):
+				protocol_type.append('{protocol:ftp}')
+				flag3=1
+			if(ports_container[x]=='21' and flag2==0):
+				protocol_type.append('{protocol:ftp}')
+				flag3=1
+			if(ports_container[x]=='23' and flag2==0):
+				protocol_type.append('{protocol:tcp}')
+				flag3=1
+			if(ports_container[x]=='25' and flag2==0):
+				protocol_type.append('{protocol:smtp}')
+				flag3=1
+			if(ports_container[x]=='69' and flag2==0):
+				protocol_type.append('{protocol:tftp}')
+				flag3=1
+			if(ports_container[x]=='110' and flag2==0):
+				protocol_type.append('{protocol:pop}')
+				flag3=1
+			if(ports_container[x]=='143' and flag2==0):
+				protocol_type.append('{protocol:imap}')
+				flag3=1
+			if(ports_container[x]=='443' and flag2==0):
+				protocol_type.append('{protocol:https}')
+				flag3=1
+			if(ports_container[x]=='465' and flag2==0):
+				protocol_type.append('{protocol:smtp}')
+				flag3=1
+			if(ports_container[x]=='563' and flag2==0):
+				protocol_type.append('{protocol:nntp}')
+				flag3=1
+			if(ports_container[x]=='587' and flag2==0):
+				protocol_type.append('{protocol:smtp}')
+				flag3=1
+			if(ports_container[x]=='993' and flag2==0):
+				protocol_type.append('{protocol:imap}')
+				flag3=1
+			if(ports_container[x]=='995' and flag2==0):
+				protocol_type.append('{protocol:pop3}')
+				flag3=1
+			if(ports_container[x]=='8080' and flag2==0):
+				protocol_type.append('{protocol:http}')
+				flag3=1
+				
+		if(flag3==0):
+			protocol_type.append('')
 
 
 #creo nodo VM che fa da host per tutti i container
 VM=Node("IaaS:service","VM1","VM",app_id,application_name)
 VM.addnode()
-
+Docker=Node("PaaS:service","Docker","?",app_id,application_name)
+Docker.addnode()
 
 #se c'è qualche container privo di networks creo nodo default-network
 if(len(networks_connects) != len(container_name)):
@@ -277,7 +234,7 @@ if(len(networks_connects) != len(container_name)):
 #creato i nodi container
 ind=0
 for x in container_name:
-	node_container.append(Node("service",x,asset_type[ind],app_id,application_name))
+	node_container.append(Node("SaaS:service",x,asset_type[ind],app_id,application_name))
 	node_container[ind].addnode()
 	ind+=1   
 
@@ -324,7 +281,7 @@ if(len(depends_on)!=0):
 						ind2+=1
 					
 					#il nodo da cui parte l'arco è sempre corretto grazie all'if che abbiamo inserito	
-					edge_uses.append(Edge(node_container[count],to_node,"uses"))
+					edge_uses.append(Edge(node_container[count],to_node,"uses"+protocol_type[count]))
 					edge_uses[count_edge].addedge(0)
 					count_edge+=1
 					
@@ -400,6 +357,17 @@ file_cypher.write("\n")
 
 
 
+#creo arco hosts da VM a Docker
+edge=Edge(VM,Docker,"hosts")
+edge.addedge(0)
+
+
+#per pulizia di codice in output:
+file_cypher.write("\n")
+
+
+
+
 #creo gli archi hosts da VM per tutti i container
 count_edge=0
 ind=0
@@ -411,7 +379,7 @@ for i in range(0,len(container_name),1):
 		to_node=getnode_fromname(node_container[ind2],container_name[i])
 		ind2+=1
 	
-	edge_hosts.append(Edge(VM,to_node,"hosts"))
+	edge_hosts.append(Edge(Docker,to_node,"hosts"))
 	
 	#l'if seguente viene utilizzato per alzare l'end:flag (e quindi in sostanza non inserire la virgola nella parte finale della query)
 	if ind!=q:
