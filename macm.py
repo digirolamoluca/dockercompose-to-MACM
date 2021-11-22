@@ -1,34 +1,25 @@
 import networkx as nx
 import re
-from config import *
 from networkx import *
+from gui import *
 
 #creo grafo
 macm=nx.DiGraph()
-
-
-print("Insert Application name:")
-application_name=input()
-
-
-print("Insert app_id:")
-app_id=input()
-
 
 file_cypher=open(destination_path+"/"+application_name+".macm","w")
 file_cypher.write("CREATE\n")
 
 
 class Node(DiGraph):
-	def __init__(self, service, namee, type_node,  app_id, application_name):
-		self.service=service
+	def __init__(self, label, namee, type_node,  app_id, application_name):
+		self.label=label
 		self.namee=namee
 		self.type_node=type_node
 		self.app_id=app_id
 		self.application_name=application_name
 		
-	def get_service(self):
-		return self.service
+	def get_label(self):
+		return self.label
 	
 	def get_name(self):
 		return self.namee
@@ -45,7 +36,7 @@ class Node(DiGraph):
 	
 	def addnode(self):
 		macm.add_node(self)
-		file_cypher.write("\t("+filtering(self.namee)+":"+self.service+" {name:'"+self.namee+"', type:'"+self.type_node+"', app_id:'"+self.app_id+"', application:'"+self.application_name+"'}),\n")
+		file_cypher.write("\t("+filtering(self.namee)+":"+self.label+" {name:'"+self.namee+"', type:'"+self.type_node+"', app_id:'"+self.app_id+"', application:'"+self.application_name+"'}),\n")
 
 		
 
