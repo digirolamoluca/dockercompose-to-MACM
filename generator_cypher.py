@@ -1,6 +1,5 @@
 import yaml
 import os
-from config import *
 from macm import *
 
 
@@ -173,46 +172,46 @@ if(ind01!=0):
 		flag3=0
 		for y in range(0,net00[x],1):
 			if(ports_container[x]=='20' and flag2==0):
-				protocol_type.append('{protocol:ftp}')
+				protocol_type.append('{protocol:"ftp"}')
 				flag3=1
 			if(ports_container[x]=='21' and flag2==0):
-				protocol_type.append('{protocol:ftp}')
+				protocol_type.append('{protocol:"ftp"}')
 				flag3=1
 			if(ports_container[x]=='23' and flag2==0):
-				protocol_type.append('{protocol:tcp}')
+				protocol_type.append('{protocol:"tcp"}')
 				flag3=1
 			if(ports_container[x]=='25' and flag2==0):
-				protocol_type.append('{protocol:smtp}')
+				protocol_type.append('{protocol:"smtp"}')
 				flag3=1
 			if(ports_container[x]=='69' and flag2==0):
-				protocol_type.append('{protocol:tftp}')
+				protocol_type.append('{protocol:"tftp"}')
 				flag3=1
 			if(ports_container[x]=='110' and flag2==0):
-				protocol_type.append('{protocol:pop}')
+				protocol_type.append('{protocol:"pop"}')
 				flag3=1
 			if(ports_container[x]=='143' and flag2==0):
-				protocol_type.append('{protocol:imap}')
+				protocol_type.append('{protocol:"imap"}')
 				flag3=1
 			if(ports_container[x]=='443' and flag2==0):
-				protocol_type.append('{protocol:https}')
+				protocol_type.append('{protocol:"https"}')
 				flag3=1
 			if(ports_container[x]=='465' and flag2==0):
-				protocol_type.append('{protocol:smtp}')
+				protocol_type.append('{protocol:"smtp"}')
 				flag3=1
 			if(ports_container[x]=='563' and flag2==0):
-				protocol_type.append('{protocol:nntp}')
+				protocol_type.append('{protocol:"nntp"}')
 				flag3=1
 			if(ports_container[x]=='587' and flag2==0):
-				protocol_type.append('{protocol:smtp}')
+				protocol_type.append('{protocol:"smtp"}')
 				flag3=1
 			if(ports_container[x]=='993' and flag2==0):
-				protocol_type.append('{protocol:imap}')
+				protocol_type.append('{protocol:"imap"}')
 				flag3=1
 			if(ports_container[x]=='995' and flag2==0):
-				protocol_type.append('{protocol:pop3}')
+				protocol_type.append('{protocol:"pop3"}')
 				flag3=1
 			if(ports_container[x]=='8080' and flag2==0):
-				protocol_type.append('{protocol:http}')
+				protocol_type.append('{protocol:"http"}')
 				flag3=1
 				
 		if(flag3==0):
