@@ -1,7 +1,7 @@
 import yaml
 import os
 from macm import *
-
+import sqlite3
 
 node_container = []
 node_networks = []
@@ -74,7 +74,24 @@ if ind==0:
 
 
 
-#ottieni ports container e associa asset type
+#uso sqlite3 per accedere al DB creato per una gestione più accurata dei porti noti
+con = sqlite3.connect('portDB.db')
+cur = con.cursor()
+
+numb_port_asset = []
+asset_type_DB = []
+numb_port_protocol = []
+protocol_DB = []
+for row in cur.execute('SELECT numb_port,asset_type FROM port WHERE asset_type!=""'):
+	numb_port_asset.append(str(row[0]))
+	asset_type_DB.append(str(row[1]))
+for row in cur.execute('SELECT numb_port,protocol FROM port WHERE protocol!=""'):
+	numb_port_protocol.append(str(row[0]))
+	protocol_DB.append(str(row[1]))
+
+con.close()
+
+#ottieni ports container e associa asset type e protocol
 ind00=0
 net00 = []
 properties0 = []
@@ -102,7 +119,7 @@ if(ind01==0):
 	print("Non è presente alcun 'ports' nel docker compose")
 
 if(ind01!=0): #mi assicuro che esistano ports
-	net3 = [] #verifico quanto numeri di porti associati ai container ci sono
+	net3 = [] #verifico quanti numeri di porti associati ai container ci sono
 	temp = ""
 	for j in range(0,len(ports),1):	
 		net3.insert(j,len(ports[j]))
@@ -129,40 +146,11 @@ if(ind01!=0):
 	for x in range(0,len(container_name),1):
 		flag2=0
 		for y in range(0,net00[x],1):
-			if(ports_container[x]=='80' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='443' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='1883' and flag2==0):
-				asset_type.append('Service.MQTTBroker?')
-				flag2=1
-			if(ports_container[x]=='1433' and flag2==0):
-				asset_type.append('Service.DB?')
-				flag2=1
-			if(ports_container[x]=='1434' and flag2==0):
-				asset_type.append('Service.DB?')
-				flag2=1
-			if(ports_container[x]=='3050' and flag2==0):
-				asset_type.append('Service.DB?')
-				flag2=1
-			if(ports_container[x]=='3306' and flag2==0):
-				asset_type.append('Service.DB?')
-				flag2=1
-			if(ports_container[x]=='5000' and flag2==0):
-				asset_type.append('Service.DB?')
-				flag2=1
-			if(ports_container[x]=='5432' and flag2==0):
-				asset_type.append('Service.DB?')
-				flag2=1
-			if(ports_container[x]=='8080' and flag2==0):
-				asset_type.append('Service.Web?')
-				flag2=1
-			if(ports_container[x]=='8883' and flag2==0):
-				asset_type.append('Service.MQTTBroker?')
-				flag2=1
-				
+			for j in range(0,len(numb_port_asset),1):
+				if(ports_container[x]==numb_port_asset[j] and flag2==0):
+					asset_type.append(asset_type_DB[j])
+					flag2=1
+			
 		if(flag2==0):
 			asset_type.append('?')
 
@@ -171,49 +159,11 @@ if(ind01!=0):
 	for x in range(0,len(container_name),1):
 		flag3=0
 		for y in range(0,net00[x],1):
-			if(ports_container[x]=='20' and flag2==0):
-				protocol_type.append('{protocol:"ftp"}')
-				flag3=1
-			if(ports_container[x]=='21' and flag2==0):
-				protocol_type.append('{protocol:"ftp"}')
-				flag3=1
-			if(ports_container[x]=='23' and flag2==0):
-				protocol_type.append('{protocol:"tcp"}')
-				flag3=1
-			if(ports_container[x]=='25' and flag2==0):
-				protocol_type.append('{protocol:"smtp"}')
-				flag3=1
-			if(ports_container[x]=='69' and flag2==0):
-				protocol_type.append('{protocol:"tftp"}')
-				flag3=1
-			if(ports_container[x]=='110' and flag2==0):
-				protocol_type.append('{protocol:"pop"}')
-				flag3=1
-			if(ports_container[x]=='143' and flag2==0):
-				protocol_type.append('{protocol:"imap"}')
-				flag3=1
-			if(ports_container[x]=='443' and flag2==0):
-				protocol_type.append('{protocol:"https"}')
-				flag3=1
-			if(ports_container[x]=='465' and flag2==0):
-				protocol_type.append('{protocol:"smtp"}')
-				flag3=1
-			if(ports_container[x]=='563' and flag2==0):
-				protocol_type.append('{protocol:"nntp"}')
-				flag3=1
-			if(ports_container[x]=='587' and flag2==0):
-				protocol_type.append('{protocol:"smtp"}')
-				flag3=1
-			if(ports_container[x]=='993' and flag2==0):
-				protocol_type.append('{protocol:"imap"}')
-				flag3=1
-			if(ports_container[x]=='995' and flag2==0):
-				protocol_type.append('{protocol:"pop3"}')
-				flag3=1
-			if(ports_container[x]=='8080' and flag2==0):
-				protocol_type.append('{protocol:"http"}')
-				flag3=1
-				
+			for j in range(0,len(numb_port_protocol),1):
+				if(ports_container[x]==numb_port_protocol[j] and flag2==0):
+					protocol_type.append('{protocol:"'+protocol_DB[j]+'"}')
+					flag3=1
+					
 		if(flag3==0):
 			protocol_type.append('')
 
